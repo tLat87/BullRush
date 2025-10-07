@@ -33,6 +33,10 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Bull's Eye Rush would like to access your photo library to share your game achievements and statistics.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Bull's Eye Rush would like to save your game achievements to your photo library.</string>
 	<key>RCTNewArchEnabled</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
