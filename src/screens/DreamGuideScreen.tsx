@@ -15,35 +15,35 @@ import TextBlockWithBackground from '../components/TextBlockWithBackground';
 
 const { width, height } = Dimensions.get('window');
 
-interface OnboardingScreenProps {
+interface DreamGuideScreenProps {
   onComplete: () => void;
 }
 
-const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }) => {
+const DreamGuideScreen: React.FC<DreamGuideScreenProps> = ({ onComplete }) => {
   const [currentPanel, setCurrentPanel] = useState(0);
   const [fadeAnim] = useState(new Animated.Value(1));
   const [slideAnim] = useState(new Animated.Value(0));
 
   const panels = [
     {
-      title: "WELCOME TO BULL'S EYE RUSH",
+      title: "WELCOME TO DREAMCATCHER",
       graphic: require('../assets/img/1a39bc0f6b51f8d31296f5ff45e6a69d1ec8c82b.png'),
-      description: "Your goal is simple: Find the Bull's Eye—the one word that connects the two others. But there's a catch: You're racing against the clock. A relentless 4-second timer keeps the Rush pressure on every question. Think fast, or the Bull gets you!"
+      description: "Discover the fascinating world of lucid dreaming and dream exploration. Learn to control your dreams, enhance dream recall, and unlock the mysteries of your subconscious mind."
     },
     {
-      title: "MASTER THE LEVELS",
+      title: "MASTER LUCID DREAMING",
       graphic: require('../assets/img/3.png'),
-      description: "Sharpen Your Horns Start with Level Mode. There are 10 Levels, each containing 5 association questions. You must get all 5 words correct before the timer runs out to unlock the next level. Difficulty increases as you progress."
+      description: "Learn powerful techniques to become aware within your dreams. Practice reality checks, use mnemonic induction, and develop the ability to control your dream experiences."
     },
     {
-      title: "THE BULL RUSH CHALLENGE",
+      title: "ENHANCE DREAM RECALL",
       graphic: require('../assets/img/2.png'),
-      description: "The Ultimate Test Ready for the big league? The Bull Rush Challenge throws all 50 words from the entire game at you, one after the other. The Rule: You keep playing until your very first mistake or time-out."
+      description: "Improve your ability to remember dreams with proven techniques. Keep a dream journal, set intentions, and develop stronger connections to your dream world."
     },
     {
-      title: "READY TO RIDE THE RUSH?",
+      title: "BEGIN YOUR DREAM JOURNEY",
       graphic: require('../assets/img/4.png'),
-      description: "Speed. Focus. Logic. Find the connection, beat the timer, and claim your spot as the Bull's Eye Master!"
+      description: "Start your adventure into the realm of dreams. Every night is an opportunity for exploration, growth, and discovery in your personal dream universe."
     }
   ];
 
@@ -100,9 +100,6 @@ const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }) => {
         >
         {/* Panel Content */}
         <View style={styles.panel}>
-          {/* Title */}
-          {/* <Text style={styles.panelTitle}>{currentPanelData.title}</Text> */}
-          
           {/* Graphic */}
           <View style={styles.graphicContainer}>
             <Image source={currentPanelData.graphic} style={{width: 300, height: 200}} />
@@ -127,9 +124,10 @@ const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }) => {
           
             {/* Next Button */}
             <ButtonWithBackground
-              text="NEXT"
-              onPress={nextPanel}
-              imagePath="path/to/button_bg.png" // You'll add this image
+              text="CONTINUE"
+            //   onPress={nextPanel}
+              onPress={()=>{}}
+              imagePath="path/to/button_bg.png"
               width="auto"
               height={50}
               textColor="#000"
@@ -159,23 +157,9 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
   },
-  panelTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#FFD700',
-    textAlign: 'center',
-    marginBottom: 40,
-    textShadowColor: '#000',
-    textShadowOffset: { width: 2, height: 2 },
-    textShadowRadius: 4,
-  },
   graphicContainer: {
     marginBottom: 40,
     alignItems: 'center',
-  },
-  graphicEmoji: {
-    fontSize: 120,
-    textAlign: 'center',
   },
   descriptionBox: {
     marginBottom: 40,
@@ -201,4 +185,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default OnboardingScreen;
+export default DreamGuideScreen;

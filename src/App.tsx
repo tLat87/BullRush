@@ -4,48 +4,53 @@ import {
   StyleSheet,
   StatusBar,
 } from 'react-native';
-import LoaderScreen from './screens/LoaderScreen';
-import OnboardingScreen from './screens/OnboardingScreen';
-import MainMenuScreen from './screens/MainMenuScreen';
-import LevelsScreen from './screens/LevelsScreen';
-import GameScreen from './screens/GameScreen';
-import BullRushScreen from './screens/BullRushScreen';
-import GameOverScreen from './screens/GameOverScreen';
-import BullRushSuccessScreen from './screens/BullRushSuccessScreen';
-import StatisticsScreen from './screens/StatisticsScreen';
-import ShareAppScreen from './screens/ShareAppScreen';
+import DreamPortalScreen from './screens/DreamPortalScreen';
+import DreamGuideScreen from './screens/DreamGuideScreen';
+import DreamHubScreen from './screens/DreamHubScreen';
+import DreamTechniquesScreen from './screens/DreamTechniquesScreen';
+import DreamJourneyScreen from './screens/DreamJourneyScreen';
+import LucidTrainingScreen from './screens/LucidTrainingScreen';
+import DreamRecordScreen from './screens/DreamRecordScreen';
+import DreamMilestonesScreen from './screens/DreamMilestonesScreen';
+import DreamAnalyticsScreen from './screens/DreamAnalyticsScreen';
+import DreamSharingScreen from './screens/DreamSharingScreen';
 import { StatsService } from './services/StatsService';
-import { GameStats } from './data/gameData';
+import { DreamStats } from './data/gameData';
 
 type Screen = 
-  | 'Loader'
-  | 'Onboarding'
-  | 'MainMenu'
-  | 'Levels'
-  | 'Game'
-  | 'BullRush'
-  | 'GameOver'
-  | 'BullRushSuccess'
-  | 'Statistics'
-  | 'ShareApp';
+  | 'DreamPortal'
+  | 'DreamGuide'
+  | 'DreamHub'
+  | 'DreamTechniques'
+  | 'DreamJourney'
+  | 'LucidTraining'
+  | 'DreamRecord'
+  | 'DreamMilestones'
+  | 'DreamAnalytics'
+  | 'DreamSharing';
 
-interface GameOverParams {
-  result: 'timeout' | 'incorrect' | 'completed';
-  score: number;
-  level?: number;
+interface DreamParams {
+  techniqueId?: number;
+  duration?: number;
+  category?: string;
+  isLucid?: boolean;
+  completed?: boolean;
 }
 
 const App: React.FC = () => {
-  const [currentScreen, setCurrentScreen] = useState<Screen>('Loader');
-  const [gameParams, setGameParams] = useState<any>({});
-  const [stats, setStats] = useState<GameStats>({
-    totalScore: 0,
-    levelsCompleted: 0,
-    bullRushCompleted: false,
-    bullRushBestScore: 0,
-    totalQuestionsAnswered: 0,
-    correctAnswers: 0,
-    averageTime: 0,
+  const [currentScreen, setCurrentScreen] = useState<Screen>('DreamPortal');
+  const [dreamParams, setDreamParams] = useState<DreamParams>({});
+  const [stats, setStats] = useState<DreamStats>({
+    totalDreams: 0,
+    lucidDreams: 0,
+    dreamRecallRate: 0,
+    currentStreak: 0,
+    longestStreak: 0,
+    techniquesCompleted: 0,
+    favoriteCategory: 'lucid-dreaming',
+    averageDreamLength: 0,
+    lastDreamDate: '',
+    realityChecksToday: 0,
   });
 
   useEffect(() => {
@@ -57,115 +62,99 @@ const App: React.FC = () => {
     setStats(loadedStats);
   };
 
-  const navigateTo = (screen: Screen, params?: any) => {
+  const navigateTo = (screen: Screen, params?: DreamParams) => {
     setCurrentScreen(screen);
     if (params) {
-      setGameParams(params);
+      setDreamParams(params);
     }
   };
 
-  const handleGameOver = async (result: 'timeout' | 'incorrect' | 'completed', score: number, level?: number) => {
-    if (level) {
-      // Level game over
-      const updatedStats = await StatsService.updateLevelCompletion(level, score);
-      setStats(updatedStats);
-      navigateTo('GameOver', { result, score, level });
-    } else {
-      // Bull Rush game over
-      if (result === 'completed') {
-        const updatedStats = await StatsService.updateBullRushCompletion(score);
-        setStats(updatedStats);
-        navigateTo('BullRushSuccess', { score });
-      } else {
-        navigateTo('GameOver', { result, score, level: 1 });
-      }
-    }
-  };
-
-  const handleQuestionResult = async (isCorrect: boolean, responseTime: number) => {
-    const updatedStats = await StatsService.updateQuestionResult(isCorrect, responseTime);
+  const handleDreamRecord = async (techniqueId: number, isLucid: boolean, category: string) => {
+    const updatedStats = await StatsService.updateDreamRecord(isLucid, category);
+    await StatsService.updateTechniqueCompletion(techniqueId);
     setStats(updatedStats);
+    navigateTo('DreamRecord', { techniqueId, isLucid, category, completed: true });
+  };
+
+  const handleRealityCheckComplete = async () => {
+    const updatedStats = await StatsService.updateRealityCheck();
+    setStats(updatedStats);
+    navigateTo('DreamRecord', { category: 'reality-check', completed: true });
   };
 
   const renderScreen = () => {
     switch (currentScreen) {
-      case 'Loader':
-        return <LoaderScreen onComplete={() => navigateTo('Onboarding')} />;
+      // case 'DreamPortal':
+      //   // return <DreamPortalScreen onComplete={() => navigateTo('DreamGuide')} />;
+      //   return <DreamPortalScreen onComplete={() => navigateTo('DreamGuide')} />;
       
-      case 'Onboarding':
-        return <OnboardingScreen onComplete={() => navigateTo('MainMenu')} />;
+      case 'DreamGuide':
+        return <DreamGuideScreen onComplete={() => navigateTo('DreamHub')} />;
       
-      case 'MainMenu':
-        return <MainMenuScreen onNavigate={(screen: string) => navigateTo(screen as Screen)} />;
+      case 'DreamHub':
+        return <DreamHubScreen onNavigate={(screen: string) => navigateTo(screen as Screen)} />;
       
-      case 'Levels':
+      case 'DreamTechniques':
         return (
-          <LevelsScreen
-            onNavigate={(screen: string, params?: any) => navigateTo(screen as Screen, params)}
-            onBack={() => navigateTo('MainMenu')}
+          <DreamTechniquesScreen
+            onNavigate={(screen: string, params?: DreamParams) => navigateTo(screen as Screen, params)}
+            onBack={() => navigateTo('DreamHub')}
           />
         );
       
-      case 'Game':
+      case 'DreamJourney':
         return (
-          <GameScreen
-            level={gameParams.level}
-            onGameOver={handleGameOver}
-            onBack={() => navigateTo('Levels')}
+          <DreamJourneyScreen
+            techniqueId={dreamParams.techniqueId || 1}
+            onDreamRecord={handleDreamRecord}
+            onBack={() => navigateTo('DreamTechniques')}
           />
         );
       
-      case 'BullRush':
+      case 'LucidTraining':
         return (
-          <BullRushScreen
-            onGameOver={handleGameOver}
-            onBack={() => navigateTo('MainMenu')}
+          <LucidTrainingScreen
+            onRealityCheckComplete={handleRealityCheckComplete}
+            onBack={() => navigateTo('DreamHub')}
           />
         );
       
-      case 'GameOver':
+      case 'DreamRecord':
         return (
-          <GameOverScreen
-            result={gameParams.result}
-            score={gameParams.score}
-            level={gameParams.level || 1}
-            onTryAgain={() => {
-              if (gameParams.level) {
-                navigateTo('Game', { level: gameParams.level });
-              } else {
-                navigateTo('BullRush');
-              }
-            }}
-            onBackHome={() => navigateTo('MainMenu')}
+          <DreamRecordScreen
+            techniqueId={dreamParams.techniqueId}
+            isLucid={dreamParams.isLucid || false}
+            category={dreamParams.category || 'lucid-dreaming'}
+            onContinue={() => navigateTo('DreamHub')}
+            onShare={() => navigateTo('DreamSharing')}
           />
         );
       
-      case 'BullRushSuccess':
+      case 'DreamMilestones':
         return (
-          <BullRushSuccessScreen
-            score={gameParams.score}
-            onShareTriumph={() => navigateTo('ShareApp')}
-            onBackHome={() => navigateTo('MainMenu')}
+          <DreamMilestonesScreen
+            onBackHome={() => navigateTo('DreamHub')}
+            onViewAnalytics={() => navigateTo('DreamAnalytics')}
           />
         );
       
-      case 'Statistics':
+      case 'DreamAnalytics':
         return (
-          <StatisticsScreen
+          <DreamAnalyticsScreen
             stats={stats}
-            onBack={() => navigateTo('MainMenu')}
+            onBack={() => navigateTo('DreamHub')}
           />
         );
       
-      case 'ShareApp':
+      case 'DreamSharing':
         return (
-          <ShareAppScreen
-            onBack={() => navigateTo('MainMenu')}
+          <DreamSharingScreen
+            onBack={() => navigateTo('DreamHub')}
           />
         );
       
       default:
-        return <LoaderScreen onComplete={() => navigateTo('Onboarding')} />;
+        return <DreamGuideScreen onComplete={() => navigateTo('DreamHub')} />;
     }
   };
 

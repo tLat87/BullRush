@@ -12,13 +12,14 @@ import BackgroundImage from '../components/BackgroundImage';
 
 const { width, height } = Dimensions.get('window');
 
-interface LoaderScreenProps {
+interface DreamPortalScreenProps {
   onComplete: () => void;
 }
 
-const LoaderScreen: React.FC<LoaderScreenProps> = ({ onComplete }) => {
+const DreamPortalScreen: React.FC<DreamPortalScreenProps> = ({ onComplete }) => {
   const [fadeAnim] = useState(new Animated.Value(0));
   const [scaleAnim] = useState(new Animated.Value(0.5));
+  const [pulseAnim] = useState(new Animated.Value(1));
   const [rotateAnim] = useState(new Animated.Value(0));
 
   useEffect(() => {
@@ -26,7 +27,7 @@ const LoaderScreen: React.FC<LoaderScreenProps> = ({ onComplete }) => {
     Animated.parallel([
       Animated.timing(fadeAnim, {
         toValue: 1,
-        duration: 1000,
+        duration: 1500,
         useNativeDriver: true,
       }),
       Animated.spring(scaleAnim, {
@@ -35,22 +36,40 @@ const LoaderScreen: React.FC<LoaderScreenProps> = ({ onComplete }) => {
         friction: 3,
         useNativeDriver: true,
       }),
-      Animated.loop(
-        Animated.timing(rotateAnim, {
+    ]).start();
+
+    // Start pulsing animation
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(pulseAnim, {
+          toValue: 1.2,
+          duration: 2000,
+          useNativeDriver: true,
+        }),
+        Animated.timing(pulseAnim, {
           toValue: 1,
           duration: 2000,
           useNativeDriver: true,
-        })
-      ),
-    ]).start();
+        }),
+      ])
+    ).start();
 
-    // Complete loading after 3 seconds
+    // Start rotating animation
+    Animated.loop(
+      Animated.timing(rotateAnim, {
+        toValue: 1,
+        duration: 8000,
+        useNativeDriver: true,
+      })
+    ).start();
+
+    // Complete portal after 4 seconds
     const timer = setTimeout(() => {
       onComplete();
-    }, 3000);
+    }, 4000);
 
     return () => clearTimeout(timer);
-  }, [fadeAnim, scaleAnim, rotateAnim, onComplete]);
+  }, [fadeAnim, scaleAnim, pulseAnim, rotateAnim, onComplete]);
 
   const spin = rotateAnim.interpolate({
     inputRange: [0, 1],
@@ -71,20 +90,26 @@ const LoaderScreen: React.FC<LoaderScreenProps> = ({ onComplete }) => {
           },
         ]}
       >
-        {/* Bull's head with target */}
+        {/* Dream portal symbol */}
         <Animated.View
           style={[
-            styles.bullContainer,
-            { transform: [{ rotate: spin }] },
+            styles.portalContainer,
+            { 
+              transform: [
+                { scale: pulseAnim },
+                { rotate: spin }
+              ] 
+            },
           ]}
         >
-            <Image source={require('../assets/img/1a39bc0f6b51f8d31296f5ff45e6a69d1ec8c82b.png')} style={{width: 300, height: 200}} />
+          {/* <Image source={require('../assets/img/1a39bc0f6b51f8d31296f5ff45e6a69d1ec8c82b.png')} style={{width: 200, height: 150}} /> */}
         </Animated.View>
         
-        {/* Game title */}
+        {/* App title */}
+        <Text style={styles.title}>DreamCatcher</Text>
         
-        {/* Loading text */}
-        <Text style={styles.loadingText}>PREPARE FOR THE RUSH...</Text>
+        {/* Portal text */}
+        <Text style={styles.portalText}>Entering the realm of dreams and lucid consciousness</Text>
         
         {/* Loading indicator */}
         <View style={styles.loadingContainer}>
@@ -100,36 +125,27 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  bullContainer: {
-    position: 'relative',
-    marginBottom: 20,
-  },
-  bullEmoji: {
-    fontSize: 80,
-    textAlign: 'center',
-  },
-  targetEmoji: {
-    position: 'absolute',
-    top: 10,
-    right: -10,
-    fontSize: 30,
+  portalContainer: {
+    marginBottom: 30,
   },
   title: {
     fontSize: 32,
     fontWeight: 'bold',
     color: '#FFD700',
     textAlign: 'center',
-    marginBottom: 10,
+    marginBottom: 20,
     textShadowColor: '#000',
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 4,
   },
-  loadingText: {
-    fontSize: 18,
+  portalText: {
+    fontSize: 16,
     color: '#FFFFFF',
     textAlign: 'center',
-    marginBottom: 30,
+    marginBottom: 40,
     opacity: 0.9,
+    paddingHorizontal: 40,
+    lineHeight: 24,
   },
   loadingContainer: {
     width: 200,
@@ -146,4 +162,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoaderScreen;
+export default DreamPortalScreen;

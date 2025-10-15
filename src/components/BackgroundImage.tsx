@@ -33,31 +33,20 @@ const BackgroundImage: React.FC<BackgroundImageProps> = ({ children, imagePath }
           style={styles.backgroundImage}
           resizeMode="cover"
         >
-          {/* Gradient layers for photo-like effect */}
          
-          
-          {/* Diagonal lines effect */}
-       
-          
-         
-          
           {children}
           
-          {/* Chinese character */}
           
         </ImageBackground>
       ) : (
         <View style={styles.backgroundGradient}>
-          {/* Gradient layers for photo-like effect */}
           <View style={styles.gradientLayer1} />
           <View style={styles.gradientLayer2} />
           
-          {/* Diagonal lines effect */}
           <View style={styles.diagonalLine1} />
           <View style={styles.diagonalLine2} />
           <View style={styles.diagonalLine3} />
           
-          {/* Decorative elements */}
           <View style={styles.cherryBlossom1} />
           <View style={styles.cherryBlossom2} />
           <View style={styles.cherryBlossom3} />
@@ -66,7 +55,6 @@ const BackgroundImage: React.FC<BackgroundImageProps> = ({ children, imagePath }
           
           {children}
           
-          {/* Chinese character */}
           <View style={styles.chineseCharContainer}>
             <View style={styles.chineseChar}>福</View>
           </View>

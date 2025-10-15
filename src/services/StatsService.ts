@@ -1,10 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { GameStats } from '../data/gameData';
+import { DreamStats } from '../data/gameData';
 
-const STATS_KEY = 'bull_rush_stats';
+const STATS_KEY = 'dream_catcher_stats';
 
 export class StatsService {
-  static async getStats(): Promise<GameStats> {
+  static async getStats(): Promise<DreamStats> {
     try {
       const statsJson = await AsyncStorage.getItem(STATS_KEY);
       if (statsJson) {
@@ -16,17 +16,20 @@ export class StatsService {
     
     // Return default stats if none exist
     return {
-      totalScore: 0,
-      levelsCompleted: 0,
-      bullRushCompleted: false,
-      bullRushBestScore: 0,
-      totalQuestionsAnswered: 0,
-      correctAnswers: 0,
-      averageTime: 0,
+      totalDreams: 0,
+      lucidDreams: 0,
+      dreamRecallRate: 0,
+      currentStreak: 0,
+      longestStreak: 0,
+      techniquesCompleted: 0,
+      favoriteCategory: 'lucid-dreaming',
+      averageDreamLength: 0,
+      lastDreamDate: '',
+      realityChecksToday: 0,
     };
   }
 
-  static async saveStats(stats: GameStats): Promise<void> {
+  static async saveStats(stats: DreamStats): Promise<void> {
     try {
       await AsyncStorage.setItem(STATS_KEY, JSON.stringify(stats));
     } catch (error) {
@@ -34,63 +37,83 @@ export class StatsService {
     }
   }
 
-  static async updateLevelCompletion(level: number, score: number): Promise<GameStats> {
+  static async updateDreamRecord(
+    isLucid: boolean,
+    category: string
+  ): Promise<DreamStats> {
     const stats = await this.getStats();
+    const today = new Date().toISOString().split('T')[0];
     
-    // Update level completion
-    if (level > stats.levelsCompleted) {
-      stats.levelsCompleted = level;
+    // Update dream count
+    stats.totalDreams += 1;
+    if (isLucid) {
+      stats.lucidDreams += 1;
     }
     
-    // Update total score
-    stats.totalScore += score;
+    // Update recall rate
+    stats.dreamRecallRate = (stats.totalDreams / 30) * 100; // Assuming 30 days
+    
+    // Update streak
+    if (stats.lastDreamDate === today) {
+      // Already recorded today, no streak change
+    } else if (stats.lastDreamDate === this.getYesterday()) {
+      // Consecutive day
+      stats.currentStreak += 1;
+    } else {
+      // Streak broken
+      stats.currentStreak = 1;
+    }
+    
+    if (stats.currentStreak > stats.longestStreak) {
+      stats.longestStreak = stats.currentStreak;
+    }
+    
+    // Update last dream date
+    stats.lastDreamDate = today;
     
     await this.saveStats(stats);
     return stats;
   }
 
-  static async updateBullRushCompletion(score: number): Promise<GameStats> {
+  static async updateTechniqueCompletion(techniqueId: number): Promise<DreamStats> {
     const stats = await this.getStats();
-    
-    stats.bullRushCompleted = true;
-    if (score > stats.bullRushBestScore) {
-      stats.bullRushBestScore = score;
-    }
-    
-    stats.totalScore += score;
-    
+    stats.techniquesCompleted += 1;
     await this.saveStats(stats);
     return stats;
   }
 
-  static async updateQuestionResult(
-    isCorrect: boolean, 
-    responseTime: number
-  ): Promise<GameStats> {
+  static async updateRealityCheck(): Promise<DreamStats> {
     const stats = await this.getStats();
-    
-    stats.totalQuestionsAnswered += 1;
-    if (isCorrect) {
-      stats.correctAnswers += 1;
-    }
-    
-    // Update average response time
-    const totalTime = stats.averageTime * (stats.totalQuestionsAnswered - 1) + responseTime;
-    stats.averageTime = totalTime / stats.totalQuestionsAnswered;
-    
+    stats.realityChecksToday += 1;
     await this.saveStats(stats);
     return stats;
+  }
+
+  static async updateFavoriteCategory(category: string): Promise<DreamStats> {
+    const stats = await this.getStats();
+    stats.favoriteCategory = category;
+    await this.saveStats(stats);
+    return stats;
+  }
+
+  private static getYesterday(): string {
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    return yesterday.toISOString().split('T')[0];
   }
 
   static async resetStats(): Promise<void> {
-    const defaultStats: GameStats = {
-      totalScore: 0,
-      levelsCompleted: 0,
-      bullRushCompleted: false,
-      bullRushBestScore: 0,
-      totalQuestionsAnswered: 0,
-      correctAnswers: 0,
-      averageTime: 0,
+    const defaultStats: DreamStats = {
+      totalDreams: 0,
+      lucidDreams: 0,
+      dreamRecallRate: 0,
+      currentStreak: 0,
+      longestStreak: 0,
+      techniquesCompleted: 0,
+      favoriteCategory: 'lucid-dreaming',
+      averageDreamLength: 0,
+      lastDreamDate: '',
+      realityChecksToday: 0,
     };
     
     await this.saveStats(defaultStats);

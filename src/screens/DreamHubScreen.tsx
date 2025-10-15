@@ -17,11 +17,11 @@ import TextBlockWithBackground from '../components/TextBlockWithBackground';
 
 const { width, height } = Dimensions.get('window');
 
-interface MainMenuScreenProps {
+interface DreamHubScreenProps {
   onNavigate: (screen: string) => void;
 }
 
-const MainMenuScreen: React.FC<MainMenuScreenProps> = ({ onNavigate }) => {
+const DreamHubScreen: React.FC<DreamHubScreenProps> = ({ onNavigate }) => {
   const [fadeAnim] = useState(new Animated.Value(0));
   const [slideAnim] = useState(new Animated.Value(30));
 
@@ -43,8 +43,8 @@ const MainMenuScreen: React.FC<MainMenuScreenProps> = ({ onNavigate }) => {
   const handleShareApp = async () => {
     try {
       const result = await Share.share({
-        message: '🐂 BULL\'S EYE RUSH 🎯\n\nI just discovered the most intense word association game!\n\n🔥 4-SECOND RUSH MECHANIC\n🎯 50 WORDS ACROSS 10 LEVELS\n⚡ THE BULL RUSH CHALLENGE\n\nCan you find the perfect Bull\'s Eye before The Rush overtakes you?\n\nDownload now!',
-        title: 'Bull\'s Eye Rush - Word Association Game',
+        message: '🌙 DREAMCATCHER 🌟\n\nI just discovered the most amazing lucid dreaming app!\n\n✨ LUCID DREAMING TECHNIQUES\n🌙 DREAM RECALL ENHANCEMENT\n🔮 REALITY CHECK TRAINING\n📊 DREAM ANALYTICS\n\nStart your journey into the dream world today!\n\nDownload now!',
+        title: 'DreamCatcher - Lucid Dreaming App',
       });
 
       if (result.action === Share.sharedAction) {
@@ -75,18 +75,30 @@ const MainMenuScreen: React.FC<MainMenuScreenProps> = ({ onNavigate }) => {
         >
         {/* Logo section */}
         <View style={styles.logoContainer}>
-          <Image source={require('../assets/img/1a39bc0f6b51f8d31296f5ff45e6a69d1ec8c82b.png')} style={{width: 300, height: 200}} />
+          <Image source={require('../assets/img/1a39bc0f6b51f8d31296f5ff45e6a69d1ec8c82b.png')} style={{width: 200, height: 150}} />
         </View>
         
         {/* Welcome banner */}
-        <Image source={require('../assets/img/Frame113.png')} style={{width: 300, height: 100, borderRadius: 10, marginBottom: 30}} />
+        <TextBlockWithBackground
+          imagePath="path/to/button_bg.png"
+          width="100%"
+          padding={20}
+          textColor="#000"
+          fontSize={16}
+          fontWeight="bold"
+          textAlign="center"
+          backgroundColor="#D7AA51"
+          style={styles.welcomeBanner}
+        >
+          <Text style={styles.welcomeText}>Welcome to your dream universe</Text>
+        </TextBlockWithBackground>
         
         {/* Navigation buttons */}
         <View style={styles.buttonsContainer}>
           <ButtonWithBackground
-            text="BULLS EYE"
-            onPress={() => onNavigate('Levels')}
-            imagePath="path/to/button_bg.png" // You'll add this image
+            text="DREAM TECHNIQUES"
+            onPress={() => onNavigate('DreamTechniques')}
+            imagePath="path/to/button_bg.png"
             width="100%"
             height={50}
             textColor="#000"
@@ -96,9 +108,9 @@ const MainMenuScreen: React.FC<MainMenuScreenProps> = ({ onNavigate }) => {
           />
           
           <ButtonWithBackground
-            text="BULLS RUSH"
-            onPress={() => onNavigate('BullRush')}
-            imagePath="path/to/button_bg.png" // You'll add this image
+            text="LUCID TRAINING"
+            onPress={() => onNavigate('LucidTraining')}
+            imagePath="path/to/button_bg.png"
             width="100%"
             height={50}
             textColor="#000"
@@ -108,9 +120,9 @@ const MainMenuScreen: React.FC<MainMenuScreenProps> = ({ onNavigate }) => {
           />
           
           <ButtonWithBackground
-            text="MY STATISTICS"
-            onPress={() => onNavigate('Statistics')}
-            imagePath="path/to/button_bg.png" // You'll add this image
+            text="DREAM ANALYTICS"
+            onPress={() => onNavigate('DreamAnalytics')}
+            imagePath="path/to/button_bg.png"
             width="100%"
             height={50}
             textColor="#000"
@@ -120,9 +132,9 @@ const MainMenuScreen: React.FC<MainMenuScreenProps> = ({ onNavigate }) => {
           />
           
           <ButtonWithBackground
-            text="SHARE APP"
-            onPress={handleShareApp}
-            imagePath="path/to/button_bg.png" // You'll add this image
+            text="DREAM SHARING"
+            onPress={() => onNavigate('DreamSharing')}
+            imagePath="path/to/button_bg.png"
             width="100%"
             height={50}
             textColor="#000"
@@ -151,54 +163,10 @@ const styles = StyleSheet.create({
   logoContainer: {
     alignItems: 'center',
     marginBottom: 40,
-    position: 'relative',
-  },
-  bullContainer: {
-    position: 'relative',
-    marginBottom: 20,
-  },
-  bullEmoji: {
-    fontSize: 80,
-    textAlign: 'center',
-  },
-  targetEmoji: {
-    position: 'absolute',
-    top: 10,
-    right: -10,
-    fontSize: 30,
-  },
-  title: {
-    fontSize: 28,
-    fontFamily: 'Arial-BoldMT',
-    fontWeight: 'bold',
-    color: '#D7AA51',
-    textAlign: 'center',
-    marginBottom: 10,
-    textShadowColor: '#000',
-    textShadowOffset: { width: 2, height: 2 },
-    textShadowRadius: 4,
-  },
-  sideBulls: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: 200,
-    marginTop: 10,
-  },
-  sideBullEmoji: {
-    fontSize: 30,
   },
   welcomeBanner: {
-    backgroundColor: '#FFD700',
-    borderRadius: 10,
-    paddingVertical: 15,
-    paddingHorizontal: 20,
     marginBottom: 30,
     width: '100%',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 8,
   },
   welcomeText: {
     fontSize: 16,
@@ -215,4 +183,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MainMenuScreen;
+export default DreamHubScreen;
