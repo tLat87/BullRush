@@ -8,7 +8,7 @@ import {
   StatusBar,
   Image,
 } from 'react-native';
-import BackgroundImage from '../components/BackgroundImage';
+import BackgroundImage from '../BullRushComponents/BackgroundImage';
 
 const { width, height } = Dimensions.get('window');
 
@@ -102,7 +102,7 @@ const DreamPortalScreen: React.FC<DreamPortalScreenProps> = ({ onComplete }) => 
             },
           ]}
         >
-          {/* <Image source={require('../assets/img/1a39bc0f6b51f8d31296f5ff45e6a69d1ec8c82b.png')} style={{width: 200, height: 150}} /> */}
+          {/* <Image source={require('../BullRushAssets/img/1a39bc0f6b51f8d31296f5ff45e6a69d1ec8c82b.png')} style={{width: 200, height: 150}} /> */}
         </Animated.View>
         
         {/* App title */}

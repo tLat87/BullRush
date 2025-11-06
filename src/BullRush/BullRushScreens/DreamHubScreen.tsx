@@ -11,9 +11,9 @@ import {
   Share,
   Alert,
 } from 'react-native';
-import BackgroundImage from '../components/BackgroundImage';
-import ButtonWithBackground from '../components/ButtonWithBackground';
-import TextBlockWithBackground from '../components/TextBlockWithBackground';
+import BackgroundImage from '../BullRushComponents/BackgroundImage';
+import ButtonWithBackground from '../BullRushComponents/ButtonWithBackground';
+import TextBlockWithBackground from '../BullRushComponents/TextBlockWithBackground';
 
 const { width, height } = Dimensions.get('window');
 
@@ -75,7 +75,7 @@ const DreamHubScreen: React.FC<DreamHubScreenProps> = ({ onNavigate }) => {
         >
         {/* Logo section */}
         <View style={styles.logoContainer}>
-          <Image source={require('../assets/img/1a39bc0f6b51f8d31296f5ff45e6a69d1ec8c82b.png')} style={{width: 200, height: 150}} />
+          <Image source={require('../BullRushAssets/img/1a39bc0f6b51f8d31296f5ff45e6a69d1ec8c82b.png')} style={{width: 200, height: 150}} />
         </View>
         
         {/* Welcome banner */}

@@ -11,10 +11,10 @@ import {
   Share,
   Alert,
 } from 'react-native';
-import { DreamStats } from '../data/gameData';
-import BackgroundImage from '../components/BackgroundImage';
-import ButtonWithBackground from '../components/ButtonWithBackground';
-import TextBlockWithBackground from '../components/TextBlockWithBackground';
+import { DreamStats } from '../BullRushData/gameData';
+import BackgroundImage from '../BullRushComponents/BackgroundImage';
+import ButtonWithBackground from '../BullRushComponents/ButtonWithBackground';
+import TextBlockWithBackground from '../BullRushComponents/TextBlockWithBackground';
 
 const { width, height } = Dimensions.get('window');
 

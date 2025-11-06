@@ -19,7 +19,7 @@ const BackgroundImage: React.FC<BackgroundImageProps> = ({ children, imagePath }
     ? { uri: imagePath } 
     : (() => {
         try {
-          return require('../assets/img/ee6deef6dc6112b8070106a2f5eefacc96827fd8.png');
+          return require('../BullRushAssets/img/ee6deef6dc6112b8070106a2f5eefacc96827fd8.png');
         } catch (error) {
           return null;
         }

@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { DreamStats } from '../data/gameData';
+import { DreamStats } from '../BullRushData/gameData';
 
 const STATS_KEY = 'dream_catcher_stats';
 

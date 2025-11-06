@@ -4,18 +4,18 @@ import {
   StyleSheet,
   StatusBar,
 } from 'react-native';
-import DreamPortalScreen from './screens/DreamPortalScreen';
-import DreamGuideScreen from './screens/DreamGuideScreen';
-import DreamHubScreen from './screens/DreamHubScreen';
-import DreamTechniquesScreen from './screens/DreamTechniquesScreen';
-import DreamJourneyScreen from './screens/DreamJourneyScreen';
-import LucidTrainingScreen from './screens/LucidTrainingScreen';
-import DreamRecordScreen from './screens/DreamRecordScreen';
-import DreamMilestonesScreen from './screens/DreamMilestonesScreen';
-import DreamAnalyticsScreen from './screens/DreamAnalyticsScreen';
-import DreamSharingScreen from './screens/DreamSharingScreen';
-import { StatsService } from './services/StatsService';
-import { DreamStats } from './data/gameData';
+import DreamPortalScreen from './BullRushScreens/DreamPortalScreen';
+import DreamGuideScreen from './BullRushScreens/DreamGuideScreen';
+import DreamHubScreen from './BullRushScreens/DreamHubScreen';
+import DreamTechniquesScreen from './BullRushScreens/DreamTechniquesScreen';
+import DreamJourneyScreen from './BullRushScreens/DreamJourneyScreen';
+import LucidTrainingScreen from './BullRushScreens/LucidTrainingScreen';
+import DreamRecordScreen from './BullRushScreens/DreamRecordScreen';
+import DreamMilestonesScreen from './BullRushScreens/DreamMilestonesScreen';
+import DreamAnalyticsScreen from './BullRushScreens/DreamAnalyticsScreen';
+import DreamSharingScreen from './BullRushScreens/DreamSharingScreen';
+import { StatsService } from './BullRushServices/StatsService';
+import { DreamStats } from './BullRushData/gameData';
 
 type Screen = 
   | 'DreamPortal'

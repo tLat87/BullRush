@@ -9,10 +9,10 @@ import {
   StatusBar,
   ScrollView,
 } from 'react-native';
-import BackgroundImage from '../components/BackgroundImage';
-import ButtonWithBackground from '../components/ButtonWithBackground';
-import TextBlockWithBackground from '../components/TextBlockWithBackground';
-import { dreamTechniques } from '../data/gameData';
+import BackgroundImage from '../BullRushComponents/BackgroundImage';
+import ButtonWithBackground from '../BullRushComponents/ButtonWithBackground';
+import TextBlockWithBackground from '../BullRushComponents/TextBlockWithBackground';
+import { dreamTechniques } from '../BullRushData/gameData';
 
 const { width, height } = Dimensions.get('window');
 

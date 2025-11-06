@@ -9,9 +9,9 @@ import {
   Image,
   ScrollView,
 } from 'react-native';
-import BackgroundImage from '../components/BackgroundImage';
-import ButtonWithBackground from '../components/ButtonWithBackground';
-import TextBlockWithBackground from '../components/TextBlockWithBackground';
+import BackgroundImage from '../BullRushComponents/BackgroundImage';
+import ButtonWithBackground from '../BullRushComponents/ButtonWithBackground';
+import TextBlockWithBackground from '../BullRushComponents/TextBlockWithBackground';
 
 const { width, height } = Dimensions.get('window');
 
@@ -27,22 +27,22 @@ const DreamGuideScreen: React.FC<DreamGuideScreenProps> = ({ onComplete }) => {
   const panels = [
     {
       title: "WELCOME TO DREAMCATCHER",
-      graphic: require('../assets/img/1a39bc0f6b51f8d31296f5ff45e6a69d1ec8c82b.png'),
+      graphic: require('../BullRushAssets/img/1a39bc0f6b51f8d31296f5ff45e6a69d1ec8c82b.png'),
       description: "Discover the fascinating world of lucid dreaming and dream exploration. Learn to control your dreams, enhance dream recall, and unlock the mysteries of your subconscious mind."
     },
     {
       title: "MASTER LUCID DREAMING",
-      graphic: require('../assets/img/3.png'),
+      graphic: require('../BullRushAssets/img/3.png'),
       description: "Learn powerful techniques to become aware within your dreams. Practice reality checks, use mnemonic induction, and develop the ability to control your dream experiences."
     },
     {
       title: "ENHANCE DREAM RECALL",
-      graphic: require('../assets/img/2.png'),
+      graphic: require('../BullRushAssets/img/2.png'),
       description: "Improve your ability to remember dreams with proven techniques. Keep a dream journal, set intentions, and develop stronger connections to your dream world."
     },
     {
       title: "BEGIN YOUR DREAM JOURNEY",
-      graphic: require('../assets/img/4.png'),
+      graphic: require('../BullRushAssets/img/4.png'),
       description: "Start your adventure into the realm of dreams. Every night is an opportunity for exploration, growth, and discovery in your personal dream universe."
     }
   ];
@@ -125,8 +125,8 @@ const DreamGuideScreen: React.FC<DreamGuideScreenProps> = ({ onComplete }) => {
             {/* Next Button */}
             <ButtonWithBackground
               text="CONTINUE"
-            //   onPress={nextPanel}
-              onPress={()=>{}}
+              onPress={nextPanel}
+              // onPress={()=>{}}
               imagePath="path/to/button_bg.png"
               width="auto"
               height={50}
