@@ -101,11 +101,7 @@ const BullRushHomeScreen: React.FC<BullRushHomeScreenProps> = ({
               <Text style={styles.linkText}>view practices</Text>
             </TouchableOpacity>
           </View>
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.ritualCarousel}
-          >
+          <View style={styles.ritualContainer}>
             {visibleRituals.map((ritual) => (
               <View key={ritual.id} style={[styles.ritualCard, isTablet && styles.ritualCardWide]}>
                 <View style={styles.ritualHeader}>
@@ -141,26 +137,22 @@ const BullRushHomeScreen: React.FC<BullRushHomeScreenProps> = ({
                 </View>
               </View>
             ))}
-          </ScrollView>
+          </View>
         </View>
 
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Quick jumps</Text>
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.quickCarousel}
-          >
+          <View style={styles.quickContainer}>
             {quickLinks.map((link) => (
               <ButtonWithBackground
                 key={link.label}
                 text={link.label}
                 onPress={link.action}
-                width={isCompact ? 180 : 200}
+                width={isCompact ? '100%' : undefined}
                 style={styles.quickButton}
               />
             ))}
-          </ScrollView>
+          </View>
         </View>
       </ScrollView>
     </BackgroundImage>
@@ -309,9 +301,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  ritualCarousel: {
-    gap: 12,
-    paddingBottom: 8,
+  ritualContainer: {
+    // gap: 12,
   },
   ritualCardWide: {
     width: 320,
@@ -369,12 +360,11 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     gap: 12,
   },
-  quickCarousel: {
+  quickContainer: {
     gap: 12,
-    paddingBottom: 8,
   },
   quickButton: {
-    flexGrow: 1,
+    marginBottom: 8,
   },
 });
 

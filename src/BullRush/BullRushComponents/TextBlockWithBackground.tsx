@@ -108,15 +108,14 @@ const styles = StyleSheet.create({
     elevation: 8,
   },
   imageBackground: {
-    width: '100%',
+    // width: '100%',
     // height: '100%',
     maxHeight: 300,
     alignItems: 'center',
     justifyContent: 'center',
   },
   fallbackBackground: {
-    width: '100%',
-    height: '100%',
+ 
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 15,
@@ -124,7 +123,7 @@ const styles = StyleSheet.create({
   textContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: '100%',
+    // width: '100%',
     height: '100%',
   },
   text: {

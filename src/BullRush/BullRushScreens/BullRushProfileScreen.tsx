@@ -45,7 +45,7 @@ const BullRushProfileScreen: React.FC<BullRushProfileScreenProps> = ({
             </TextBlockWithBackground>
           ))}
         </View>
-
+{/* 
         <TextBlockWithBackground style={styles.section}>
           <Text style={styles.sectionTitle}>My settings</Text>
           <View style={styles.settingRow}>
@@ -75,7 +75,7 @@ const BullRushProfileScreen: React.FC<BullRushProfileScreenProps> = ({
             <Text style={styles.settingEmoji}>📤</Text>
           </TouchableOpacity>
           <ButtonWithBackground text="Contact support" onPress={() => {}} />
-        </TextBlockWithBackground>
+        </TextBlockWithBackground> */}
 
         <TextBlockWithBackground style={styles.section}>
           <Text style={styles.sectionTitle}>Affirmations</Text>

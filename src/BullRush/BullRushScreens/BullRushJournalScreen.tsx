@@ -101,11 +101,7 @@ const BullRushJournalScreen: React.FC<BullRushJournalScreenProps> = ({
         </View>
 
         {recentEntries.length > 0 ? (
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.entryCarousel}
-          >
+          <View style={styles.entryContainer}>
             {recentEntries.map((entry) => (
               <TextBlockWithBackground key={entry.id} style={styles.entryCard}>
                 <View style={styles.entryHeader}>
@@ -145,7 +141,7 @@ const BullRushJournalScreen: React.FC<BullRushJournalScreenProps> = ({
                 </View>
               </TextBlockWithBackground>
             ))}
-          </ScrollView>
+          </View>
         ) : (
           <TextBlockWithBackground style={styles.emptyState}>
             Start your first entry to see it here ✨
@@ -225,9 +221,8 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   entryCard: {
-    width: 260,
-    marginRight: 12,
-    flexShrink: 0,
+    width: '100%',
+    marginBottom: 16,
   },
   entryHeader: {
     flexDirection: 'row',
@@ -235,8 +230,8 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     marginBottom: 12,
   },
-  entryCarousel: {
-    paddingBottom: 8,
+  entryContainer: {
+    gap: 16,
   },
   favoriteBtn: {
     paddingHorizontal: 6,
