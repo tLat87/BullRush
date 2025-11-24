@@ -281,7 +281,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.BullRush.main;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mygymhub.app;
 				PRODUCT_NAME = BullRush;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -308,7 +308,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.BullRush.main;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mygymhub.app;
 				PRODUCT_NAME = BullRush;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
